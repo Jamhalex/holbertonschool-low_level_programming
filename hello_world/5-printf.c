@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-/*
+/**
  *  main - Prints a message using printf
  *  Description: This function prints
- */
+*/
 
 int main(void)
 {
