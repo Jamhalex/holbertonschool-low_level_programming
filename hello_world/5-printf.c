@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 /*
- * C program that prints x followed  by new line
+ *  main - Prints a message using printf
+ *  Description: This function prints
  */
 
 int main(void)
