@@ -8,14 +8,15 @@
 
 int main(void)
 {
-	char alphabt;
+	char alphabet;
 
-	for (alphabt = 'a'; alphabt <= 'z'; alphabt++)
+	for (alphabet = 'a'; alphabet <= 'z'; alphabet++)
 
 	{
-		if (alphabt != 'q' && alphabt != 'e')
-		putchar(alphabt);
+		if (alphabet != 'q' && alphabet != 'e')
+		putchar(alphabet);
 	}
 
 	putchar('\n');
+	return (0);
 }
