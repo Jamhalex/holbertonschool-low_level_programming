@@ -1,26 +1,19 @@
 #include <stdio.h>
 
 /**
- * main - Prints all possible combinations of single-digit numbers
+ * main - Prints all numbers of base 16 in lowercase
  *
+ * Description: Uses only putchar and prints 0123456789abcdef
  * Return: Always 0 (Success)
  */
 int main(void)
 {
-	int number;
+	int n;
 
-	for (number = '0'; number <= '9'; number++)
-	{
-		putchar(number);
-
-			if (number != '9')
-			{
-						putchar(',');
-						putchar(' ');
-			}
-	}
-
+	for (n = '0'; n <= '9'; n++)
+		putchar(n);
+	for (n = 'a'; n <= 'f'; n++)
+		putchar(n);
 	putchar('\n');
-
 	return (0);
 }
