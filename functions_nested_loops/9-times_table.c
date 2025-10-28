@@ -1,25 +1,45 @@
 #include "main.h"
 
-/**
+/*
  * times_table - Prints the 9 times table, starting with 0.
+ *
+ * Description:
+ * Prints a 10x10 grid (0..9) where each product is right-aligned
+ * in a 2-character field, separated by comma and space.
  */
 void times_table(void)
 {
-int num, mult, prod;
-for (num = 0; num <= 9; num++)
-{
-_putchar('0');
-for (mult = 1; mult <= 9; mult
-{
-_putchar(',');
-_putchar(' ');
-prod = num * mult;
-if (prod <= 9)
-_putchar(' ');
-else
-_putchar((prod / 10) + '0');
-_putchar((prod % 10) + '0');
-}
-_putchar('\n');
-}
+	int row, col, prod;
+
+	for (row = 0; row <= 9; row++)
+	{
+		for (col = 0; col <= 9; col++)
+		{
+			prod = row * col;
+
+			if (col == 0)
+			{
+				/* first column: print single digit (or 0) without leading comma */
+				_putchar('0' + prod);
+			}
+			else
+			{
+				_putchar(',');
+				_putchar(' ');
+
+				/* right-align to width 2 */
+				if (prod < 10)
+				{
+					_putchar(' ');
+					_putchar('0' + prod);
+				}
+				else
+				{
+					_putchar('0' + (prod / 10));
+					_putchar('0' + (prod % 10));
+				}
+			}
+		}
+		_putchar('\n');
+	}
 }
