@@ -1,10 +1,12 @@
 #include "main.h"
 
 /**
- * times_table - Print the 9 times table, starting with 0
- *
+ * times_table - Prints the 9 times table, starting with 0.
+ * Description: Prints a 10x10 grid (0..9) where each product is
+ * right-aligned in a 2-character field, separated by comma and space.
  * Return: void
  */
+
 void times_table(void)
 {
     int row, col, prod;
