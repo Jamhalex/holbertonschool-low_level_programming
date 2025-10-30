@@ -1,46 +1,61 @@
 #include "main.h"
+#include <limits.h>
 
 /**
- * _atoi - Converts a string to an integer safely (GNU89).
+ * _atoi - Converts a string to an integer.
  * @s: String to convert.
  *
- * Return: Parsed int (undefined on true overflow, but avoids UB on INT_MIN).
+ * Description: Skips non-sign/non-digit chars, accumulates the net sign from
+ * any leading '+' or '-' before digits, then parses contiguous digits.
+ * Prevents signed overflow by clamping to INT_MAX/INT_MIN.
+ *
+ * Return: The parsed integer.
  */
 int _atoi(char *s)
 {
-int i;
-int sign;
-int started;
-int res;
-sign = 1;
-started = 0;
-res = 0;
-/* scan: collect sign flips before digits; once digits start, stop on first non-digit */
-for (i = 0; s[i] != '\0'; i++)
-{
-if (s[i] == '-' && !started)
-{
-sign = -sign;
-continue;
-}
-if (s[i] == '+' && !started)
-{
-continue;
-}
-if (s[i] >= '0' && s[i] <= '9')
-{
-int d = s[i] - '0';
-started = 1;
-/* accumulate as negative: res = res*10 - d; stays within int for INT_MIN */
-res = res * 10 - d;
-}
-else if (started)
-{
-break;
-}
-}
-if (sign == -1)
-return res;
-/* sign is positive: return -res; note: if true positive overflow happens, C leaves it undefined */
-return -res;
+	int i;
+	int sign;
+	int started;
+	int res;
+
+	sign = 1;
+	res = 0;
+	started = 0;
+
+	for (i = 0; s[i] != '\0'; i++)
+	{
+			if (!started && (s[i] == '-' || s[i] == '+'))
+			{
+						if (s[i] == '-')
+							sign = -sign;
+						continue;
+			}
+
+			if (s[i] >= '0' && s[i] <= '9')
+			{
+						int d = s[i] - '0';
+
+						started = 1;
+
+						if (sign > 0)
+						{
+										if (res > (INT_MAX - d) / 10)
+											return (INT_MAX);
+										res = res * 10 + d;
+						}
+						else
+						{
+										/* Build as negative to avoid INT_MIN flip overflow */
+										if (res < (INT_MIN + d) / 10)
+											return (INT_MIN);
+										res = res * 10 - d;
+						}
+			}
+			else if (started)
+			{
+						break;
+			}
+	}
+
+	return (res);
 }
