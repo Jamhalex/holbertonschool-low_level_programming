@@ -5,14 +5,14 @@
  * @n: Number to print.
  *
  * Return: void
-*/
+ */
 static void print_num(int n)
 {
-	if (n >= 10)
-	{
-			_putchar('0' + (n / 10));
-	}
-	_putchar('0' + (n % 10));
+if (n >= 10)
+{
+_putchar('0' + (n / 10));
+}
+_putchar('0' + (n % 10));
 }
 
 /**
@@ -22,15 +22,14 @@ static void print_num(int n)
  */
 void more_numbers(void)
 {
-	int row;
-	int n;
-
-	for (row = 0; row < 10; row++)
-	{
-		for (n = 0; n <= 14; n++)
-		{
-			print_num(n);
-		}
-		_putchar('\n');
-	}
+int row;
+int n;
+for (row = 0; row < 10; row++)
+{
+for (n = 0; n <= 14; n++)
+{
+print_num(n);
+}
+_putchar('\n');
+}
 }
