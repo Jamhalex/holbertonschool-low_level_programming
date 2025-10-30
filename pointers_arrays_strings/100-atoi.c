@@ -1,41 +1,46 @@
 #include "main.h"
 
 /**
- * _atoi - Converts a string to an integer.
+ * _atoi - Converts a string to an integer safely (GNU89).
  * @s: String to convert.
  *
- * Return: The parsed integer (in range of int).
+ * Return: Parsed int (undefined on true overflow, but avoids UB on INT_MIN).
  */
 int _atoi(char *s)
 {
-int i, sign, started, value;
+int i;
+int sign;
+int started;
+int res;
 sign = 1;
-value = 0;
 started = 0;
+res = 0;
+/* scan: collect sign flips before digits; once digits start, stop on first non-digit */
 for (i = 0; s[i] != '\0'; i++)
 {
-if (s[i] == '-')
+if (s[i] == '-' && !started)
 {
-if (!started)
 sign = -sign;
-else
-break;
+continue;
 }
-else if (s[i] == '+')
+if (s[i] == '+' && !started)
 {
-if (started)
-break;
+continue;
 }
-else if (s[i] >= '0' && s[i] <= '9')
+if (s[i] >= '0' && s[i] <= '9')
 {
+int d = s[i] - '0';
 started = 1;
-value = value * 10 + (s[i] - '0');
+/* accumulate as negative: res = res*10 - d; stays within int for INT_MIN */
+res = res * 10 - d;
 }
-else
+else if (started)
 {
-if (started)
 break;
 }
 }
-return (sign * value);
+if (sign == -1)
+return res;
+/* sign is positive: return -res; note: if true positive overflow happens, C leaves it undefined */
+return -res;
 }
