@@ -1,7 +1,7 @@
 #include "main.h"
 #include <stdio.h>
 /**
- * _strcat - Concatenates two strings.
+ * _strncat - Concatenates two strings.
  * @dest: Destination buffer; must have enough space.
  * @src:  Source string to append.
  *
@@ -12,7 +12,7 @@
  * Return: Pointer to @dest.
  */
 
-char *_strcat(char *dest, char *src)
+char *_strncat(char *dest, char *src)
 {
 char *p = dest;
 
